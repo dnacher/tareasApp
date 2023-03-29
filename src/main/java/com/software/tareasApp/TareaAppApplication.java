@@ -2,9 +2,7 @@ package com.software.tareasApp;
 
 import com.software.tareasApp.Logger.LogManagerClass;
 import com.software.tareasApp.controller.LoginController;
-import com.software.tareasApp.persistence.model.Cliente;
 import com.software.tareasApp.persistence.model.PermisoUsuario;
-import com.software.tareasApp.persistence.model.Poliza;
 import com.software.tareasApp.persistence.model.Usuario;
 import com.software.tareasApp.utils.UtilsGeneral;
 import com.software.tareasApp.view.constantes.Constantes;
@@ -30,8 +28,6 @@ public class TareaAppApplication extends Application {
 
 	public static Usuario usuario;
 	public static List<PermisoUsuario> permisosUsuario;
-	public static List<Cliente> clientes;
-	public static List<Poliza> polizas;
 	public static ConfigurableApplicationContext applicationContext;
 	private LogManagerClass log = new LogManagerClass(getClass());
 

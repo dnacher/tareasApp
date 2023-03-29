@@ -1,11 +1,12 @@
 package com.software.tareasApp.view.constantes;
 
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import java.util.List;
 
 /**
  * Daniel Nacher
@@ -126,124 +127,12 @@ public class ConstantesPaginas {
         }
     }
 
-    public void setLayouts(Label label, TextField textField){
-        String[] arrStr = this.element.split(",");
-        label.setLayoutX(Double.parseDouble(arrStr[0]));
-        label.setLayoutY(Double.parseDouble(arrStr[1]));
-        textField.setLayoutX(Double.parseDouble(arrStr[2]));
-        textField.setLayoutY(Double.parseDouble(arrStr[3]));
-    }
-
     private void setTextField(String valores, Label label, TextField textField){
         String[] arrStr = valores.split(",");
         label.setLayoutX(Double.parseDouble(arrStr[0]));
         label.setLayoutY(Double.parseDouble(arrStr[1]));
         textField.setLayoutX(Double.parseDouble(arrStr[2]));
         textField.setLayoutY(Double.parseDouble(arrStr[3]));
-    }
-
-    private void setTextText(String valores, Label label, Label labelValor){
-        String[] arrStr = valores.split(",");
-        label.setLayoutX(Double.parseDouble(arrStr[0]));
-        label.setLayoutY(Double.parseDouble(arrStr[1]));
-        labelValor.setLayoutX(Double.parseDouble(arrStr[2]));
-        labelValor.setLayoutY(Double.parseDouble(arrStr[3]));
-    }
-
-    private void setDatePicker(String valores, Label label, DatePicker cmbDate){
-        String[] arrStr = valores.split(",");
-        label.setLayoutX(Double.parseDouble(arrStr[0]));
-        label.setLayoutY(Double.parseDouble(arrStr[1]));
-        cmbDate.setLayoutX(Double.parseDouble(arrStr[2]));
-        cmbDate.setLayoutY(Double.parseDouble(arrStr[3]));
-    }
-
-    private void setCmb(String valores, Label label, ComboBox cmb){
-        String[] arrStr = valores.split(",");
-        label.setLayoutX(Double.parseDouble(arrStr[0]));
-        label.setLayoutY(Double.parseDouble(arrStr[1]));
-        cmb.setLayoutX(Double.parseDouble(arrStr[2]));
-        cmb.setLayoutY(Double.parseDouble(arrStr[3]));
-    }
-
-    private void setChk(String valores, Label label, CheckBox chk){
-        String[] arrStr = valores.split(",");
-        label.setLayoutX(Double.parseDouble(arrStr[0]));
-        label.setLayoutY(Double.parseDouble(arrStr[1]));
-        chk.setLayoutX(Double.parseDouble(arrStr[2]));
-        chk.setLayoutY(Double.parseDouble(arrStr[3]));
-    }
-
-    private void setChkCmb(String valores, CheckBox chk, ComboBox cmb){
-        String[] arrStr = valores.split(",");
-        chk.setLayoutX(Double.parseDouble(arrStr[0]));
-        chk.setLayoutY(Double.parseDouble(arrStr[1]));
-        cmb.setLayoutX(Double.parseDouble(arrStr[2]));
-        cmb.setLayoutY(Double.parseDouble(arrStr[3]));
-    }
-
-    private void setBtnConIcono(String valores, Label lbl, Button btn, Label lblValor){
-        String[] arrStr = valores.split(",");
-        lbl.setLayoutX(Double.parseDouble(arrStr[0]));
-        lbl.setLayoutY(Double.parseDouble(arrStr[1]));
-        btn.setLayoutX(Double.parseDouble(arrStr[2]));
-        btn.setLayoutY(Double.parseDouble(arrStr[3]));
-        lblValor.setLayoutX(Double.parseDouble(arrStr[4]));
-        lblValor.setLayoutY(Double.parseDouble(arrStr[5]));
-    }
-
-    private void setTextArea(String valores, Label lbl, TextArea txt, Label lblValor){
-        String[] arrStr = valores.split(",");
-        lbl.setLayoutX(Double.parseDouble(arrStr[0]));
-        lbl.setLayoutY(Double.parseDouble(arrStr[1]));
-        txt.setLayoutX(Double.parseDouble(arrStr[2]));
-        txt.setLayoutY(Double.parseDouble(arrStr[3]));
-        lblValor.setLayoutX(Double.parseDouble(arrStr[4]));
-        lblValor.setLayoutY(Double.parseDouble(arrStr[5]));
-    }
-
-    public void setPoliza(Label lblCompania, Button btnCompania, Label lblCompaniaValor,
-                          Label lblCliente, Button btnCliente, Label lblClienteValor,
-                          Label lblNumeroPoliza, TextField txtNumeroPoliza,
-                          Label lblFechaComienzo, DatePicker cmbFechaComienzo,
-                          Label lblFechaVencimiento, DatePicker cmbFechaVencimiento,
-                          Label lblProducto, Button btnProducto, Label lblProductoValor,
-                          Label lblTipoProducto, Label lblTipoProductoValor,
-                          Label lblPremio, TextField txtPremio,
-                          Label lblPrima, TextField txtPrima,
-                          Label lblMoneda, ComboBox cmbMoneda,
-                          Label lblComision, Label lblComisionValor,
-                          Label lblFormaPago, ComboBox cmbFormaPago,
-                          Label lblCuotas, TextField txtCuotas,
-                          Label lblComienzoCuota, DatePicker cmbComienzoCuota,
-                          Label lblFinCuota, DatePicker cmbFinCuota,
-                          Label lblImporteCuota, Label lblImporteCuotaValor,
-                          Label lblCerradoPor, Label lblCerradoPorValor,
-                          Label lblEsApp, CheckBox chkEsApp,
-                          Label lblEstado, ComboBox cmbEstado,
-                          CheckBox chkVendedor, ComboBox cmbVendedor,
-                          Label lblObservaciones, TextArea txtObservaciones, Label lblInfoObservaciones){
-        setBtnConIcono(poliza, lblCompania, btnCompania, lblCompaniaValor);
-        setBtnConIcono(poliza1, lblCliente, btnCliente, lblClienteValor);
-        setTextField(poliza2,lblNumeroPoliza, txtNumeroPoliza);
-        setDatePicker(poliza3, lblFechaComienzo, cmbFechaComienzo);
-        setDatePicker(poliza4, lblFechaVencimiento, cmbFechaVencimiento);
-        setBtnConIcono(poliza5, lblProducto, btnProducto, lblProductoValor);
-        setTextText(poliza6,lblTipoProducto, lblTipoProductoValor);
-        setTextField(poliza7, lblPremio, txtPremio);
-        setTextField(poliza8, lblPrima, txtPrima);
-        setCmb(poliza9, lblMoneda, cmbMoneda);
-        setTextText(poliza20,lblComision,lblComisionValor);
-        setCmb(poliza21,lblFormaPago, cmbFormaPago);
-        setTextField(poliza22, lblCuotas, txtCuotas);
-        setDatePicker(poliza23, lblComienzoCuota, cmbComienzoCuota);
-        setDatePicker(poliza24, lblFinCuota, cmbFinCuota);
-        setTextText(poliza25, lblImporteCuota,lblImporteCuotaValor);
-        setTextText(poliza26,lblCerradoPor,lblCerradoPorValor);
-        setChk(poliza27,lblEsApp,chkEsApp);
-        setCmb(poliza28, lblEstado,cmbEstado);
-        setChkCmb(poliza29,chkVendedor,cmbVendedor);
-        setTextArea(poliza30,lblObservaciones, txtObservaciones, lblInfoObservaciones);
     }
 
     public void set2Valores(Label lblNombre, TextField txtNombre, Label lblDescripcion, TextField txtDescripcion){

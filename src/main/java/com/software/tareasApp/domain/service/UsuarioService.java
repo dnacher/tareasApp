@@ -1,9 +1,7 @@
 package com.software.tareasApp.domain.service;
 
-import com.software.tareasApp.exceptions.TareasAppException;
 import com.software.tareasApp.exceptions.UAuthException;
 import com.software.tareasApp.persistence.dao.UsuarioDAO;
-import com.software.tareasApp.persistence.model.TipoUsuario;
 import com.software.tareasApp.persistence.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +23,6 @@ public class UsuarioService {
     public List<Usuario> getUsuarios(){
         return usuarioDAO.getUsuarios();
     }
-
-    public Usuario getUsuarioById(Integer id){ return usuarioDAO.getUsuarioById(id); }
 
     public Usuario saveUsuario(Usuario usuario){
         return usuarioDAO.saveUsuario(usuario);

@@ -58,7 +58,6 @@ public class MainController implements Initializable {
     private void setStage(Stage stage, double height, double width){
         stage.setHeight(height);
         stage.setWidth(width);
-//        stage.centerOnScreen();
     }
 
     @FXML

@@ -4,7 +4,9 @@ import com.software.tareasApp.Logger.LogManagerClass;
 import com.software.tareasApp.TareaAppApplication;
 import com.software.tareasApp.domain.service.PermisoUsuarioService;
 import com.software.tareasApp.domain.service.UsuarioService;
-import com.software.tareasApp.enums.*;
+import com.software.tareasApp.enums.Errores;
+import com.software.tareasApp.enums.MenuPrincipal;
+import com.software.tareasApp.enums.MenuSeguridad;
 import com.software.tareasApp.persistence.model.PermisoUsuario;
 import com.software.tareasApp.utils.UtilsGeneral;
 import com.software.tareasApp.view.animations.FadeInUpTransition;
@@ -31,7 +33,13 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-import static com.software.tareasApp.view.constantes.Constantes.*;
+import static com.software.tareasApp.view.constantes.Constantes.EXTENSION_FXML;
+import static com.software.tareasApp.view.constantes.Constantes.MENU_PRINCIPAL;
+import static com.software.tareasApp.view.constantes.Constantes.MENU_SEGURIDAD;
+import static com.software.tareasApp.view.constantes.Constantes.PAGINA_LOGIN;
+import static com.software.tareasApp.view.constantes.Constantes.PAGINA_MAIN;
+import static com.software.tareasApp.view.constantes.Constantes.PAGINA_ROOT;
+
 
 @Component
 public class MenuController implements Initializable {
@@ -218,18 +226,6 @@ public class MenuController implements Initializable {
                 listaMenu = cargaLista(MENU_SEGURIDAD);
                 menuActual = MENU_SEGURIDAD;
                 break;
-            case "Configuracion":
-                listaMenu = cargaLista(MENU_CONFIGURACION);
-                menuActual = MENU_CONFIGURACION;
-                break;
-            case "Estados":
-                listaMenu = cargaLista(MENU_ESTADOS);
-                menuActual = MENU_ESTADOS;
-                break;
-            case "Tipos":
-                listaMenu = cargaLista(MENU_TIPOS);
-                menuActual = MENU_TIPOS;
-                break;
             default:
                 className = getController(ruta);
                 ruta = creaRuta(ruta);
@@ -249,12 +245,8 @@ public class MenuController implements Initializable {
         switch(menuActual){
             case MENU_PRINCIPAL:
                 return MenuPrincipal.valueOf(ruta).getController();
-            case MENU_CONFIGURACION:
-                return MenuConfiguracion.valueOf(ruta).getController();
             case MENU_SEGURIDAD:
                 return MenuSeguridad.valueOf(ruta).getController();
-            case MENU_ESTADOS:
-                return MenuEstados.valueOf(ruta).getController();
             default:
                 return null;
         }
@@ -279,28 +271,14 @@ public class MenuController implements Initializable {
     public List<String> cargaLista(String str) {
         List<String> listaCarga = new ArrayList<>();
         switch (str) {
-            case MENU_CONFIGURACION:
-                getMenuConfiguracion(listaCarga);
-                break;
             case MENU_SEGURIDAD:
                 getMenuSeguridad(listaCarga);
                 break;
             case MENU_PRINCIPAL:
                 getMenuPrincipal(listaCarga);
                 break;
-            case MENU_ESTADOS:
-                getMenuEstado(listaCarga);
-                break;
         }
         return listaCarga;
-    }
-
-    private void getMenuConfiguracion(List<String> listaCarga){
-        Arrays.stream(MenuConfiguracion.values()).forEach(p -> {
-            listaCarga.addAll(listaPermisos.stream()
-                    .filter(pu -> pu.getPagina().equals(p.getPagina()))
-                    .map(f -> f.getPagina()).collect(Collectors.toList()));
-        });
     }
 
     private void getMenuPrincipal(List<String> listaCarga){
@@ -313,14 +291,6 @@ public class MenuController implements Initializable {
 
     private void getMenuSeguridad(List<String> listaCarga){
         Arrays.stream(MenuSeguridad.values()).forEach(p -> {
-            listaCarga.addAll(listaPermisos.stream()
-                    .filter(pu -> pu.getPagina().equals(p.getPagina()))
-                    .map(f -> f.getPagina()).collect(Collectors.toList()));
-        });
-    }
-
-    private void getMenuEstado(List<String> listaCarga){
-        Arrays.stream(MenuEstados.values()).forEach(p -> {
             listaCarga.addAll(listaPermisos.stream()
                     .filter(pu -> pu.getPagina().equals(p.getPagina()))
                     .map(f -> f.getPagina()).collect(Collectors.toList()));

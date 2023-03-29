@@ -7,7 +7,6 @@ import com.software.tareasApp.exceptions.UAuthException;
 import com.software.tareasApp.persistence.model.TipoUsuario;
 import com.software.tareasApp.persistence.model.Usuario;
 import com.software.tareasApp.persistence.repository.UsuarioRepository;
-import com.software.tareasApp.view.constantes.Constantes;
 import com.software.tareasApp.view.constantes.ConstantesErrores;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,18 +34,6 @@ public class UsuarioDAO {
         return usuarios;
     }
 
-    public Usuario getUsuarioById(Integer id) throws TareasAppException {
-        log.info(TareaAppApplication.usuario, "getUsuarioById " + id);
-        return this.repository
-                .findById(id)
-                .orElseThrow(
-                        () -> {
-                            String msg = String.format("The user id %s does not exist", id);
-                            log.error(TareaAppApplication.usuario, msg);
-                            return new TareasAppException(msg);
-                        });
-    }
-
     public Usuario saveUsuario(Usuario usuario) throws TareasAppException {
         log.info(TareaAppApplication.usuario, "saveUsuario " + usuario);
         String hashedPassword= BCrypt.hashpw(usuario.getPassword(),BCrypt.gensalt(LOG_ROUNDS));
@@ -64,18 +51,6 @@ public class UsuarioDAO {
         }
         log.warn(ConstantesErrores.ERROR_CREDENCIALES);
         throw new UAuthException(ConstantesErrores.ERROR_CREDENCIALES);
-    }
-
-
-    public List<Usuario> saveUsuarios(List<Usuario> usuarios) throws TareasAppException {
-        List<Usuario> finalList = new ArrayList<>();
-        this.repository
-                .saveAll(usuarios)
-                .forEach(
-                        user -> {
-                            finalList.add(user);
-                        });
-        return finalList;
     }
 
     public void deleteUsuario(Usuario usuario) {
@@ -100,7 +75,4 @@ public class UsuarioDAO {
         repository.updateUsuarioSinPass(nombreUsuario, tipoUsuario, id);
     }
 
-    public Integer countByNombre(String nombre){
-        return this.repository.countByNombre(nombre);
-    }
 }

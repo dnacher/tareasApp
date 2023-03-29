@@ -23,10 +23,6 @@ public class TareaService {
         return tareaDAO.getTareas();
     }
 
-    public Tarea getTareasById(Integer id){
-        return tareaDAO.getTareasById(id);
-    }
-
     public List<Tarea> findByUsuario(Usuario usuario){
         return tareaDAO.findByUsuario(usuario);
     }

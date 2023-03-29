@@ -1,7 +1,6 @@
 package com.software.tareasApp.persistence.model;
 
 import com.google.gson.Gson;
-import com.software.tareasApp.utils.UtilsGeneral;
 import com.software.tareasApp.view.constantes.Constantes;
 
 import javax.persistence.CascadeType;
@@ -88,10 +87,6 @@ public class Tarea {
 
     public String getNombre(){
         return usuario.getNombre();
-    }
-
-    public String getFechaToString() {
-        return UtilsGeneral.getFechaFormato(getFecha());
     }
 
     public Map<String, Integer> getTotalXTarea(){

@@ -19,20 +19,8 @@ public class PermisoUsuarioService {
         this.permissionUserDAO= permissionUserDAO;
     }
 
-    public List<PermisoUsuario> getPermisoUsuarios(){
-        return permissionUserDAO.getPermissionUsers();
-    }
-
-    public PermisoUsuario getPermisoUsuarioById(Integer id){
-        return permissionUserDAO.getPermissionUserById(id);
-    }
-
     public List<PermisoUsuario> findAllByUserType(TipoUsuario tipoUsuario){
         return permissionUserDAO.findAllByUserType(tipoUsuario);
-    }
-
-    public PermisoUsuario savePermissionUser(PermisoUsuario permisoUsuario){
-        return permissionUserDAO.savePermissionUser(permisoUsuario);
     }
 
     public List<PermisoUsuario> savePermissionUserList(List<PermisoUsuario> listaPermisoUsuarios){
@@ -41,14 +29,6 @@ public class PermisoUsuarioService {
             finalist.add(permissionUserDAO.savePermissionUser(pu));
         });
         return finalist;
-    }
-
-    public PermisoUsuario updatePermissionUser(PermisoUsuario permisoUsuario){
-        return permissionUserDAO.updatePermissionUser(permisoUsuario);
-    }
-
-    public void deletePermissionUser(PermisoUsuario permisoUsuario){
-        permissionUserDAO.deletePermissionUser(permisoUsuario);
     }
 
     public void deleteByTipoUsuario(TipoUsuario tu){

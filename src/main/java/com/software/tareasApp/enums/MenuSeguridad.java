@@ -36,10 +36,6 @@ public enum MenuSeguridad {
         return menu;
     }
 
-	public String getCarpeta() {
-		return carpeta;
-	}
-
     public Class getController() {
         return controller;
     }

@@ -23,7 +23,15 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -355,7 +363,6 @@ public class TareasController implements Initializable {
 
 	public void task() {
 		Task<Void> longTask = UtilsGeneral.task();
-
 		longTask.setOnSucceeded(t -> {
 			try {
 				if(TareaAppApplication.usuario.getNombre().equals("Mathias")){
@@ -527,9 +534,7 @@ public class TareasController implements Initializable {
 
 	private Map<String, Integer> getMap(){
 		List<Map<String, Integer>> list = new ArrayList<>();
-		tareasReoporte.forEach(tarea ->{
-			list.add(tarea.getTotalXTarea());
-		});
+		tareasReoporte.forEach(tarea -> list.add(tarea.getTotalXTarea()));
 		 return list.stream()
 						.flatMap(m -> m.entrySet().stream())
 						.collect(groupingBy(Map.Entry::getKey, summingInt(Map.Entry::getValue)));
@@ -625,7 +630,7 @@ public class TareasController implements Initializable {
 			mapChk.put(Constantes.NOCHE, chkCamaNoche.isSelected());
 			tareaSelected.setFecha(UtilsGeneral.getDateFromLocalDate(cmbFecha.getValue()));
 			tareaSelected.setUsuario(TareaAppApplication.usuario);
-			tareaSelected.setTotal(Integer.valueOf(total));
+			tareaSelected.setTotal(total);
 			tareaSelected.setTareas(new Gson().toJson(mapChk));
 
 			if(updateProcess){

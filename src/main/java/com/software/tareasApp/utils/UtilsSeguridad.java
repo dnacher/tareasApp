@@ -1,7 +1,6 @@
 package com.software.tareasApp.utils;
 
 import com.software.tareasApp.TareaAppApplication;
-import com.software.tareasApp.enums.MenuPrincipal;
 import com.software.tareasApp.view.constantes.ConstantePermisos;
 import javafx.scene.control.Button;
 
@@ -66,37 +65,6 @@ public class UtilsSeguridad {
         btnEliminar.setDisable(!active);
     }
 
-    public static boolean traePermisoComision(String pagina){
-        return TareaAppApplication.permisosUsuario.stream()
-                .filter(pu -> pu.getPagina().equals(pagina))
-                .anyMatch(pu -> pu.getPermiso()>=9);
-    }
-
-    public static void setPermisoXPermiso(Button button, String pagina, ConstantePermisos permiso){
-       button.setDisable(!traePermisos(pagina, permiso));
-    }
-
-    public static void setPermisoAdmin(Button button, String pagina){
-        button.setDisable(traePermisos(pagina, ConstantePermisos.PERMISO_ADMIN));
-    }
-
-    public static boolean hasPermiso(String pagina, ConstantePermisos permiso){
-        return traePermisos(pagina, permiso);
-    }
-
-    public static void setButtons(Button btnActualizar, Button btnEliminar, boolean disable, String pagina){
-        boolean permiso = UtilsSeguridad.hasPermiso(pagina, ConstantePermisos.PERMISO_ADMIN);
-        btnActualizar.setDisable(disable);
-        btnEliminar.setDisable(disable);
-        if(!permiso){
-            btnActualizar.setDisable(true);
-            btnEliminar.setDisable(true);
-        }else{
-            btnActualizar.setDisable(disable);
-            btnEliminar.setDisable(disable);
-        }
-    }
-
     private static int getPermisoValor(String pagina){
         return TareaAppApplication.permisosUsuario.stream()
                 .filter(pu -> pu.getPagina().equals(pagina)).findFirst().get().getPermiso();
@@ -107,11 +75,4 @@ public class UtilsSeguridad {
         traePermisosAdministrador(btnEliminar, pagina);
         return getPermisoValor(pagina);
     }
-
-    public static boolean hasEditorPermisos(Button btnAgregar, Button btnActualizar, Button btnGuardar, String pagina){
-        return TareaAppApplication.permisosUsuario.stream()
-                .filter(pu -> pu.getPagina().equals(pagina))
-                .anyMatch(pu -> pu.getPermiso()>=3 && pu.getPermiso()!=9);
-    }
-
 }

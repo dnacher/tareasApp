@@ -34,18 +34,6 @@ public class TareaDAO {
         return tareas;
     }
 
-    public Tarea getTareasById(Integer id) throws TareasAppException {
-        log.info(TareaAppApplication.usuario, "getTareaById " + id);
-        return this.repository
-                .findById(id)
-                .orElseThrow(
-                        () -> {
-                            String msg = String.format("The crash id %s does not exist", id);
-                            log.error(TareaAppApplication.usuario, msg);
-                            return new TareasAppException(msg);
-                        });
-    }
-
     public List<Tarea> findByUsuario(Usuario usuario){
         List<Tarea> tareas = new ArrayList<>();
         log.info(TareaAppApplication.usuario, "getTareaByUsuario " + usuario.getNombre());

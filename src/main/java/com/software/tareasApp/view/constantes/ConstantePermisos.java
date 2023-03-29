@@ -16,10 +16,6 @@ public enum ConstantePermisos {
         this.permisoValorConComision = permisoValorConComision;
     }
 
-    public String getPermisoNombre() {
-        return permisoNombre;
-    }
-
     public int getPermisoValorSinComision() {
         return permisoValorSinComision;
     }

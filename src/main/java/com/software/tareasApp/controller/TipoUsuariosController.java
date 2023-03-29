@@ -4,7 +4,6 @@ import com.software.tareasApp.Logger.LogManagerClass;
 import com.software.tareasApp.TareaAppApplication;
 import com.software.tareasApp.domain.service.TipoUsuarioService;
 import com.software.tareasApp.enums.Errores;
-import com.software.tareasApp.enums.MenuConfiguracion;
 import com.software.tareasApp.enums.MenuSeguridad;
 import com.software.tareasApp.exceptions.TareasAppException;
 import com.software.tareasApp.persistence.model.TipoUsuario;
@@ -21,16 +20,18 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -154,7 +155,7 @@ public class TipoUsuariosController implements Initializable {
 				recargarTabla();
 				UtilsGeneral.correct(ConstantesMensajes.ELIMINADO_OK);
 			} catch (DataIntegrityViolationException ex){
-				UtilsGeneral.error(Errores.COMPANIA_ASOCIADA_OTRO_REGISTRO);
+				UtilsGeneral.error(Errores.TIPO_USUARIO_ASOCIADO_OTRO_REGISTRO);
 				logger.error(TareaAppApplication.usuario, ex.getMessage(), ex);
 			} catch (Exception ex) {
 				errorLog(ex);

@@ -12,7 +12,6 @@ public final class Constantes {
      *                          RUTAS
 	 */
 	public static final String PAGINA_ROOT = "/fragments/";
-	public static final String IMAGEN_ROOT = "/images/";
 	public static final String LOGO = "/images/icono.png";
 	public static final String AGUS = "/images/happy.png";
 	public static final String MATHI = "/images/model.png";
@@ -21,12 +20,8 @@ public final class Constantes {
      *                          MENUS
 	 */
 	public static final String EXTENSION_FXML = ".fxml";
-	public static final String EXTENSION_PNG = ".png";
 	public static final String MENU_SEGURIDAD = "MenuSeguridad";
-	public static final String MENU_CONFIGURACION = "MenuConfiguracion";
 	public static final String MENU_PRINCIPAL = "MenuPrincipal";
-	public static final String MENU_ESTADOS = "MenuEstados";
-	public static final String MENU_TIPOS = "MenuTipos";
 
 	public static final String PAGINA_INI = Constantes.PAGINA_ROOT + "splash" + Constantes.EXTENSION_FXML;
 	public static final String PAGINA_LOGIN = Constantes.PAGINA_ROOT + "login" + Constantes.EXTENSION_FXML;
@@ -38,41 +33,18 @@ public final class Constantes {
 	public static final String PAGINA_MAIN = Constantes.PAGINA_ROOT + "Inicio" + Constantes.EXTENSION_FXML;
 
 	/*
-     *                         IMAGENES
-	 */
-	public static final String VERDE = IMAGEN_ROOT + "verde" + EXTENSION_PNG;
-	public static final String AMARILLO = IMAGEN_ROOT + "amarillo" + EXTENSION_PNG;
-	public static final String ROJO = IMAGEN_ROOT + "rojo" + EXTENSION_PNG;
-	public static final String AZUL = IMAGEN_ROOT + "azul" + EXTENSION_PNG;
-
-
-	/*
      *                             LISTAS
 	 */
 	public static final List<String> LISTA_MESES = Arrays.asList("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
 																"Julio", "Agosto","Setiembre", "Octubre", "Noviembre", "Diciembre");
-	public static final List<String> LISTA_REPORTES = Arrays.asList(
-			"Poliza",
-			"Vencimiento Poliza",
-			"Cumpleaños Clientes",
-			"Total Prima",
-			"Total Premio",
-			"Ventas por producto",
-			"Producto Prima Total",
-			"Comisiones");
 
 	public static final List<String> USUARIOS = Arrays.asList("Daniel", "Mathias", "Agustina");
-
-	public static final List<Integer> LISTA_CUOTAS = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-
-	public static final String SBN = "SBN Group";
 
 	/*
      *                             OTROS
 	 */
 	public static final String EXCEL = "Libro Excel 97-2003";
 	public static final String EXTENSION_EXCEL = "*.xls";
-	public static final String PESIFICADO = "El valor con moneda en US$ esta pesificado";
 
 	public static final String ROPA = "Ropa";
 	public static final String TAZA = "Taza";

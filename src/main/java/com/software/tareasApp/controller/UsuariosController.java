@@ -21,14 +21,20 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -121,15 +127,11 @@ public class UsuariosController implements Initializable {
 	}
 
 	private void btnResetearPassOnAction(){
-		btnResetearPass.setOnAction((event) -> {
-			resetearPass();
-		});
+		btnResetearPass.setOnAction((event) -> resetearPass());
 	}
 
 	private void btnAgregarOnAction() {
-		btnAgregar.setOnAction((event) -> {
-			nuevoUsuario();
-		});
+		btnAgregar.setOnAction((event) -> nuevoUsuario());
 	}
 
 	private void btnGuardarOnAction() {
@@ -188,7 +190,7 @@ public class UsuariosController implements Initializable {
 				recargarTabla();
 				UtilsGeneral.correct(ConstantesMensajes.ELIMINADO_OK);
 			} catch (DataIntegrityViolationException ex){
-				UtilsGeneral.error(Errores.COMPANIA_ASOCIADA_OTRO_REGISTRO);
+				UtilsGeneral.error(Errores.USUARIO_ASOCIADO_OTRO_REGISTRO);
 				logger.error(TareaAppApplication.usuario, ex.getMessage(), ex);
 			} catch (Exception ex) {
 				errorLog(ex);

@@ -2,8 +2,9 @@ package com.software.tareasApp.utils;
 
 import com.software.tareasApp.Logger.LogManagerClass;
 import com.software.tareasApp.TareaAppApplication;
-import com.software.tareasApp.enums.*;
-import com.software.tareasApp.persistence.model.Poliza;
+import com.software.tareasApp.enums.Errores;
+import com.software.tareasApp.enums.MenuPrincipal;
+import com.software.tareasApp.enums.MenuSeguridad;
 import com.software.tareasApp.view.constantes.Constantes;
 import com.software.tareasApp.view.constantes.ConstantesEtiquetas;
 import eu.hansolo.enzo.notification.Notification;
@@ -13,11 +14,11 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -26,9 +27,12 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Objects;
+import java.util.Optional;
 
 import static com.software.tareasApp.TareaAppApplication.applicationContext;
 
@@ -147,66 +151,6 @@ public class UtilsGeneral {
                 .toLocalDate();
     }
 
-    public static boolean esNumero(String s) {
-        boolean esNumero;
-        try {
-            Double.parseDouble(s);
-            esNumero = true;
-        } catch (Exception ex) {
-            esNumero = false;
-        }
-        return esNumero;
-    }
-
-    public static boolean esPorcentaje(String s){
-        if(esNumero(s)){
-            return Double.valueOf(s) >= 0 && Double.valueOf(s) <= 100;
-        } else{
-            return false;
-        }
-    }
-
-    public static Date getLastDayNextMonth() {
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MONTH, 2);
-        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
-        return cal.getTime();
-    }
-
-    public static Date getFirstDayNextMonth() {
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MONTH, 2);
-        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));
-        return cal.getTime();
-    }
-
-    public static Integer getFirstDayMonth(int month){
-        month--;
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.MONTH, month);
-        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));
-        return cal.get(Calendar.DATE);
-    }
-
-    public static Integer getLastDayMonth(int month) {
-        month--;
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.DATE, 1);
-        cal.set(Calendar.MONTH, month);
-        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
-        return cal.get(Calendar.DATE);
-    }
-
-    public static Date getFirstDayMonthDate(String monthString){
-        int month = getMesInteger(monthString);
-        month--;
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.MONTH, month);
-        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));
-        cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE),0,0);
-        return cal.getTime();
-    }
-
     public static Date getLastDayMonthDate(String monthString) {
         int month = getMesInteger(monthString);
         month--;
@@ -279,32 +223,6 @@ public class UtilsGeneral {
         }
     }
 
-    public static boolean numeroPositivo(String value){
-        return esNumero(value) && Integer.valueOf(value)>0;
-    }
-
-    public static String getFechaFormato(Date date) {
-        if(date!=null){
-            String fecha="";
-            LocalDate ld = date.toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate();
-            if(ld.getDayOfMonth()<10){
-                fecha+= "0" + ld.getDayOfMonth() + "-";
-            }else{
-                fecha+= ld.getDayOfMonth() + "-";
-            }
-            if(ld.getMonthValue()<10){
-                fecha+= "0" + ld.getMonthValue() + "-";
-            }else{
-                fecha+= ld.getMonthValue() + "-";
-            }
-            return fecha + ld.getYear();
-        }else{
-            return "";
-        }
-    }
-
     public static Task task(){
         return new Task<Void>() {
             @Override
@@ -322,45 +240,17 @@ public class UtilsGeneral {
         };
     }
 
-    public static boolean isNullOrEmpty(String str){
-        return (str == null || str.isEmpty());
-    }
-
     public static String traeNombrePagina(String str, String menuActual) {
         String pagina = MenuPrincipal.Inicio.getPagina();
         switch (menuActual) {
-            case Constantes.MENU_CONFIGURACION:
-              pagina = getMenuConfiguracion(str);
-              break;
             case Constantes.MENU_SEGURIDAD:
                 pagina = getMenuSeguridad(str);
                 break;
             case Constantes.MENU_PRINCIPAL:
                 pagina = getMenuPrincipal(str);
                 break;
-            case Constantes.MENU_ESTADOS:
-                pagina = getMenuEstados(str);
-                break;
           }
         return pagina;
-    }
-
-    private static String getMenuEstados(String str){
-        Optional<MenuEstados> optional = Arrays.stream(MenuEstados.values()).
-                filter(menu -> menu.getPagina().equals(str)).
-                findFirst();
-        if(optional.isPresent()){
-            return optional.get().getPagina();
-        }else return ConstantesEtiquetas.VACIO;
-    }
-
-    private static String getMenuConfiguracion(String str){
-        Optional<MenuConfiguracion> optional = Arrays.stream(MenuConfiguracion.values()).
-                filter(menu -> menu.getPagina().equals(str)).
-                findFirst();
-        if(optional.isPresent()){
-            return optional.get().getPagina();
-        }else return ConstantesEtiquetas.VACIO;
     }
 
     private static String getMenuSeguridad(String str){
@@ -381,51 +271,6 @@ public class UtilsGeneral {
         }else return ConstantesEtiquetas.VACIO;
     }
 
-    public static ImageView traeEstado(String estado) {
-        ImageView iv;
-        switch (estado) {
-            case "finalizado":
-                iv = new ImageView(Constantes.VERDE);
-                break;
-            case "en proceso":
-                iv = new ImageView(Constantes.AMARILLO);
-                break;
-            default:
-                iv = new ImageView(Constantes.ROJO);
-                break;
-        }
-        iv.setFitHeight(18);
-        iv.setFitWidth(18);
-        return iv;
-    }
-
-    public static Poliza creaPoliza(Poliza poliza){
-        Poliza newPoliza = new Poliza();
-        newPoliza.setId(poliza.getId());
-        newPoliza.setCompania(poliza.getCompania());
-        newPoliza.setCliente(poliza.getCliente());
-        newPoliza.setNumeroPoliza(poliza.getNumeroPoliza());
-        newPoliza.setComienzo(poliza.getComienzo());
-        newPoliza.setVencimiento(poliza.getVencimiento());
-        newPoliza.setProducto(poliza.getProducto());
-        newPoliza.setTipoProducto(poliza.getTipoProducto());
-        newPoliza.setPremio(poliza.getPremio());
-        newPoliza.setPrima(poliza.getPrima());
-        newPoliza.setMoneda(poliza.getMoneda());
-        newPoliza.setComisionPorcentaje(poliza.getComisionPorcentaje());
-        newPoliza.setFormaPago(poliza.getFormaPago());
-        newPoliza.setCuotas(poliza.getCuotas());
-        newPoliza.setComienzoCuota(poliza.getComienzoCuota());
-        newPoliza.setFinCuota(poliza.getFinCuota());
-        newPoliza.setImporteCuota(poliza.getImporteCuota());
-        newPoliza.setCerradoPor(poliza.getCerradoPor());
-        newPoliza.setEsApp(poliza.getEsApp());
-        newPoliza.setEstado(poliza.getEstado());
-        newPoliza.setVendedor(poliza.getVendedor());
-        newPoliza.setPolizaMadre(poliza.getPolizaMadre());
-        return newPoliza;
-    }
-
     public static Optional<ButtonType> getDialogoEliminar(AnchorPane pane, String valorAEliminar, Class getClass){
         Stage stage = (Stage) pane.getScene().getWindow();
         Alert.AlertType type = Alert.AlertType.CONFIRMATION;
@@ -439,90 +284,4 @@ public class UtilsGeneral {
         return alert.showAndWait();
     }
 
-    public static Optional<ButtonType> getDialogoCierreAnio(AnchorPane pane, String valorAEliminar, Class getClass){
-        Stage stage = (Stage) pane.getScene().getWindow();
-        Alert.AlertType type = Alert.AlertType.CONFIRMATION;
-        Alert alert = new Alert(type, "");
-        alert.initModality(Modality.APPLICATION_MODAL);
-        alert.initOwner(stage);
-        alert.getDialogPane().setHeaderText("Se cerrara el año " + valorAEliminar);
-        DialogPane dialog = alert.getDialogPane();
-        dialog.getStylesheets().add(Objects.requireNonNull(getClass.getResource("/css/Metro-UI.css")).toString());
-        dialog.getStyleClass().add("dialog");
-        return alert.showAndWait();
-    }
-
-    public static void textArea(Label lblInfoObservaciones, TextArea txtObservaciones){
-        final int MAX_CHARS = 500;
-        lblInfoObservaciones.setText(MAX_CHARS + "");
-        txtObservaciones.setTextFormatter(new TextFormatter<String>(change ->
-                change.getControlNewText().length() <= MAX_CHARS ? change : null));
-        txtObservaciones.textProperty().addListener((observable, oldValue, newValue) -> {
-            int characterLeft = MAX_CHARS - txtObservaciones.getText().length();
-            if(characterLeft<50){
-                lblInfoObservaciones.setTextFill(Paint.valueOf("#b80d07"));
-            }else{
-                lblInfoObservaciones.setTextFill(Paint.valueOf("#2b579a"));
-            }
-            lblInfoObservaciones.setText(characterLeft + "");
-        });
-    }
-
-    public static String creaNumeroPolizaEndoso(String numeroPoliza){
-        String nuevoNumeroPoliza;
-        String[] parts = numeroPoliza.split("_");
-        if(parts.length>1){
-            int nuevo = Integer.parseInt(parts[1]);
-            nuevo++;
-            nuevoNumeroPoliza = parts[0] + "_" + nuevo;
-        }else{
-            nuevoNumeroPoliza = numeroPoliza + "_1";
-        }
-        return nuevoNumeroPoliza;
-    }
-
-    public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        long factor = (long) Math.pow(10, places);
-        value = value * factor;
-        long tmp = Math.round(value);
-        return (double) tmp / factor;
-    }
-
-    public static void refreshBusqueda(TextField txtPolizaBusqueda){
-        if(!isNullOrEmpty(txtPolizaBusqueda.getText())){
-            StringBuffer sb = new StringBuffer(txtPolizaBusqueda.getText());
-            String tet = txtPolizaBusqueda.getText();
-            sb.deleteCharAt(sb.length()-1);
-            txtPolizaBusqueda.setText(sb.toString());
-            txtPolizaBusqueda.setText(tet);
-        }
-    }
-
-    //uuid
-    private String generateUuid(){
-        long most64SigBits = get64MostSignificantBitsForVersion1();
-        long least64SigBits = get64LeastSignificantBitsForVersion1();
-        UUID uuid= new UUID(most64SigBits, least64SigBits);
-        return uuid.toString();
-    }
-
-    private long get64LeastSignificantBitsForVersion1() {
-        Random random = new Random();
-        long random63BitLong = random.nextLong() & 0x3FFFFFFFFFFFFFFFL;
-        long variant3BitFlag = 0x8000000000000000L;
-        return random63BitLong + variant3BitFlag;
-    }
-
-    private long get64MostSignificantBitsForVersion1() {
-        LocalDateTime start = LocalDateTime.of(1582, 10, 15, 0, 0, 0);
-        java.time.Duration duration = java.time.Duration.between(start, LocalDateTime.now());
-        long seconds = duration.getSeconds();
-        long nanos = duration.getNano();
-        long timeForUuidIn100Nanos = seconds * 10000000 + nanos * 100;
-        long least12SignificatBitOfTime = (timeForUuidIn100Nanos & 0x000000000000FFFFL) >> 4;
-        long version = 1 << 12;
-        return (timeForUuidIn100Nanos & 0xFFFFFFFFFFFF0000L) + version + least12SignificatBitOfTime;
-    }
 }

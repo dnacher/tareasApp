@@ -4,7 +4,9 @@ import com.software.tareasApp.Logger.LogManagerClass;
 import com.software.tareasApp.TareaAppApplication;
 import com.software.tareasApp.domain.service.PermisoUsuarioService;
 import com.software.tareasApp.domain.service.TipoUsuarioService;
-import com.software.tareasApp.enums.*;
+import com.software.tareasApp.enums.Errores;
+import com.software.tareasApp.enums.MenuPrincipal;
+import com.software.tareasApp.enums.MenuSeguridad;
 import com.software.tareasApp.exceptions.TareasAppException;
 import com.software.tareasApp.persistence.model.PermisoUsuario;
 import com.software.tareasApp.persistence.model.TipoUsuario;
@@ -19,7 +21,12 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -268,8 +275,6 @@ public class SeguridadController implements Initializable {
         if (tableData.getSelectionModel().getSelectedItem() != null) {
             tu = tableData.getSelectionModel().getSelectedItem();
             inicio = new PermisoUsuario(tu, MenuPrincipal.Inicio.getPagina(), 7);
-            estados = new PermisoUsuario(tu, MenuConfiguracion.Estados.getPagina(), 7);
-            configuracion = new PermisoUsuario(tu, MenuPrincipal.Configuracion.getPagina(), 7);
             seguridad = new PermisoUsuario(tu, MenuPrincipal.Seguridad.getPagina(), 7);
 
             lblTIpoUsuario.setText(tu.getNombre());
@@ -325,9 +330,7 @@ public class SeguridadController implements Initializable {
 
     public void verificaCarpeta(String pagina, boolean agregar) {
         Arrays.stream(MenuPrincipal.values()).filter(ma -> ma.getPagina().equals(pagina)).findFirst().ifPresent(menuPrincipal -> lblInicio.setVisible(agregar));
-        Arrays.stream(MenuConfiguracion.values()).filter(ma -> ma.getPagina().equals(pagina)).findFirst().ifPresent(menuConfiguracion -> lblConfiguracion.setVisible(agregar));
         Arrays.stream(MenuSeguridad.values()).filter(ma -> ma.getPagina().equals(pagina)).findFirst().ifPresent(menuSeguridad -> lblSeguridad.setVisible(agregar));
-        Arrays.stream(MenuEstados.values()).filter(ma -> ma.getPagina().equals(pagina)).findFirst().ifPresent(menuEstados -> lblEstados.setVisible(agregar));
     }
 
     public void agregarTodos() {
