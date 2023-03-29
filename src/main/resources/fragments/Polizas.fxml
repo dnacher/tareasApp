@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1400.0" style="-fx-background-color: white;" stylesheets="@../css/Metro-UI.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="paneFormulario" layoutY="91.0" opacity="0.0" prefHeight="570.0" prefWidth="1429.0" style="-fx-background-color: white;">
+          <Button fx:id="btnBackFormulario" layoutX="29.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../css/buttonCircleBlack.css">
+              <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@../images/arrowLeftBlack.png" />
+                      </image>
+                  </ImageView>
+              </graphic>
+          </Button>
+          <Text fx:id="txtInfoPoliza" fill="#2b579a" layoutX="79.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0">
+              <font>
+                  <Font name="Segoe UI Semilight" size="24.0" />
+              </font>
+          </Text>
+        <TabPane fx:id="tabPane" layoutX="29" layoutY="70" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://www.w3.org/2001/XInclude">
+           <tabs>
+              <Tab fx:id="tabPolizas" text="Polizas">
+                 <Pane layoutX="14.0" layoutY="37.0" prefHeight="521.0" prefWidth="1375.0">
+                    <children>
+                          <!--  Primera fila   -->
+                          <Label fx:id="lblCompania" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="122.0" text="Compañia" />
+                          <Button fx:id="btnCompania" mnemonicParsing="false" prefHeight="8.0" prefWidth="15.0" stylesheets="@../css/buttonCircleBlack.css">
+                             <graphic>
+                                <ImageView fitHeight="8.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                   <image>
+                                      <Image url="@../images/search.png" />
+                                   </image>
+                                </ImageView>
+                             </graphic>
+                          </Button>
+                          <Label fx:id="lblCompaniaValor" prefWidth="250.0" textFill="#2b579a" />
+
+                          <Label fx:id="lblCliente" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="122.0" text="Cliente" />
+                          <Button fx:id="btnCliente" mnemonicParsing="false" prefHeight="8.0" prefWidth="15.0" stylesheets="@../css/buttonCircleBlack.css">
+                             <graphic>
+                                <ImageView fitHeight="8.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                   <image>
+                                      <Image url="@../images/search.png" />
+                                   </image>
+                                </ImageView>
+                             </graphic>
+                          </Button>
+                          <Label fx:id="lblClienteValor" prefWidth="250.0" textFill="#2b579a" />
+
+                          <Label fx:id="lblNumeroPoliza" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="122.0" text="Numero de Poliza" />
+                          <TextField fx:id="txtNumeroPoliza" prefWidth="250.0" />
+
+                          <Label fx:id="lblFechaComienzo" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="122.0" text="Fecha Comienzo" />
+                          <DatePicker fx:id="cmbFechaComienzo" prefWidth="250.0" />
+
+                          <Label fx:id="lblFechaVencimiento" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="132.0" text="Fecha Vencimiento" />
+                          <DatePicker fx:id="cmbFechaVencimiento" prefWidth="250.0" />
+
+                          <Label fx:id="lblProducto" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="122.0" text="Producto" />
+                          <Button fx:id="btnProducto" mnemonicParsing="false" prefHeight="8.0" prefWidth="15.0" stylesheets="@../css/buttonCircleBlack.css">
+                             <graphic>
+                                <ImageView fitHeight="8.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                   <image>
+                                      <Image url="@../images/search.png" />
+                                   </image>
+                                </ImageView>
+                             </graphic>
+                          </Button>
+                          <Label fx:id="lblProductoValor" prefWidth="250.0" textFill="#2b579a" />
+
+                          <Label fx:id="lblTipoProducto" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="122.0" text="Tipo de Producto" />
+                          <Label fx:id="lblTipoProductoValor" prefWidth="250.0" textFill="#2b579a" />
+
+                          <Label fx:id="lblPremio" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="122.0" text="Premio" />
+                          <TextField fx:id="txtPremio" prefWidth="250.0" />
+
+                          <Label fx:id="lblPrima" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="122.0" text="Prima" />
+                          <TextField fx:id="txtPrima" prefWidth="250.0" />
+
+                          <Label fx:id="lblMoneda" alignment="CENTER_RIGHT" layoutX="62" layoutY="387.0" prefHeight="17.0" prefWidth="122.0" text="Moneda" />
+                          <ComboBox fx:id="cmbMoneda" layoutX="193.0" layoutY="390.0" prefWidth="250.0" />
+
+                        <Text fx:id="lblInfoEndoso" textAlignment="RIGHT" fill="#2b579a" layoutX="52" layoutY="472.0">
+                            <font>
+                                <Font name="Segoe UI Semilight" size="24.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="lblInfoSiniestro" textAlignment="RIGHT" fill="#2b579a" layoutX="52" layoutY="493.0">
+                            <font>
+                                <Font name="Segoe UI Semilight" size="24.0" />
+                            </font>
+                        </Text>
+
+                          <!--  Segunda fila   -->
+                          <Label fx:id="lblComision" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="180.0" text="Comision" />
+                          <Label fx:id="lblComisionValor" prefWidth="250.0" textFill="#2b579a" />
+
+                          <Label fx:id="lblFormaPago" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="180.0" text="Forma de pago" />
+                          <ComboBox fx:id="cmbFormaPago" prefWidth="250.0" />
+
+                          <Label fx:id="lblCuotas" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="180.0" text="Cuotas" />
+                          <TextField fx:id="txtCuotas" prefWidth="250.0" />
+
+                          <Label fx:id="lblComienzoCuota" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="180.0" text="Comienzo de cuota" />
+                          <DatePicker fx:id="cmbComienzoCuota" prefWidth="250.0" />
+
+                          <Label fx:id="lblFinCuota" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="180.0" text="Fin de cuota" />
+                          <DatePicker fx:id="cmbFinCuota" prefWidth="250.0" />
+
+                          <Label fx:id="lblImporteCuota" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="180.0" text="Importe cuota" />
+                          <Label fx:id="lblImporteCuotaValor" prefWidth="250.0" textFill="#2b579a" />
+
+                          <Label fx:id="lblCerradoPor" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="180.0" text="Cerrado por" />
+                          <Label fx:id="lblCerradoPorValor" prefWidth="250.0" textFill="#2b579a" />
+
+                          <Label fx:id="lblEsApp" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="180.0" text="Es app" />
+                          <CheckBox fx:id="chkEsApp" prefWidth="250.0" />
+
+                          <Label fx:id="lblEstado" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="180.0" text="Estado" />
+                          <ComboBox fx:id="cmbEstado" prefWidth="250.0" />
+
+                          <CheckBox fx:id="chkVendedor" prefWidth="250.0" text="Vendedor" />
+                          <ComboBox fx:id="cmbVendedor" prefWidth="250.0" />
+
+                          <Label fx:id="lblObservaciones" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="180.0" text="Observaciones" />
+                          <TextArea fx:id="txtObservaciones" prefWidth="250.0" />
+                          <Label fx:id="lblInfoObservaciones" text="Label" />
+
+                          <Button fx:id="btnGuardar" layoutX="507.0" layoutY="562.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" styleClass="btn" text="Guardar" />
+                       </children>
+                 </Pane>
+              </Tab>
+              <Tab fx:id="tabEndosos" text="Endosos">
+                 <Pane layoutX="14.0" layoutY="37.0" prefHeight="521.0" prefWidth="1375.0">
+                    <children>
+                       <TableView fx:id="tablePolizaEndoso" layoutY="60.0" prefWidth="1400.0" />
+                       <Label fx:id="lblInfoTablePolizaEndoso" layoutX="29.0" layoutY="508.0" maxHeight="0.0" prefHeight="30.0" prefWidth="500.0" textFill="#b80d07" />
+                    </children>
+                 </Pane>
+              </Tab>
+              <Tab fx:id="tabSiniestro" text="Siniestros">
+                 <Pane layoutX="14.0" layoutY="37.0" prefHeight="521.0" prefWidth="1375.0">
+                    <children>
+                       <TableView fx:id="tableSiniestro" layoutY="60.0" prefWidth="1400.0" />
+                    </children>
+                 </Pane>
+              </Tab>
+           </tabs>
+        </TabPane>
+      </AnchorPane>
+      <AnchorPane fx:id="paneTablePolizas" layoutY="91.0" opacity="0.0" prefHeight="560.0" prefWidth="1400.0">
+         <children>
+            <TextField fx:id="txtPolizaBusqueda" layoutX="500.0" layoutY="20.0" prefWidth="400.0" promptText="Buscador" />
+            <TableView fx:id="tablePoliza" layoutX="29.0" layoutY="92.0" prefHeight="396.0" prefWidth="1400.0" />
+            <Label fx:id="lblInfoPoliza" layoutX="29.0" layoutY="508.0" maxHeight="0.0" prefHeight="30.0" prefWidth="500.0" textFill="#b80d07" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneTableProductos" layoutY="91.0" opacity="0.0" prefHeight="560.0" prefWidth="1400.0">
+         <children>
+            <TextField fx:id="txtProductoBusqueda" layoutX="500.0" layoutY="20.0" prefWidth="400.0" promptText="Buscador" />
+            <TableView fx:id="tableProducto" layoutX="29.0" layoutY="92.0" prefHeight="396.0" prefWidth="1400.0" />
+            <Label fx:id="lblInfoProducto" layoutX="29.0" layoutY="508.0" maxHeight="0.0" prefHeight="30.0" prefWidth="500.0" textFill="#b80d07" />
+            <Button fx:id="btnBackTablaProductos" layoutX="29.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../css/buttonCircleBlack.css">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/arrowLeftBlack.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneTableClientes" layoutY="91.0" opacity="0.0" prefHeight="560.0" prefWidth="1400.0">
+         <children>
+            <TextField fx:id="txtClienteBusqueda" layoutX="500.0" layoutY="20.0" prefWidth="400.0" promptText="Buscador" />
+            <TableView fx:id="tableCliente" layoutX="29.0" layoutY="92.0" prefHeight="396.0" prefWidth="1400.0" />
+            <Label fx:id="lblInfoCliente" layoutX="29.0" layoutY="508.0" maxHeight="0.0" prefHeight="30.0" prefWidth="500.0" textFill="#b80d07" />
+            <Button fx:id="btnBackTablaClientes" layoutX="29.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../css/buttonCircleBlack.css">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/arrowLeftBlack.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Separator layoutY="89.0" prefHeight="0.0" prefWidth="1400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Text fx:id="title" fill="#2b579a" layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Segoe UI Semilight" size="48.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnAgregar" defaultButton="true" layoutX="957.0" layoutY="46.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" styleClass="btn" text="Agregar" />
+      <Button fx:id="btnEndoso" defaultButton="true" layoutX="1067.0" layoutY="46.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" styleClass="btn" text="Endoso" />
+      <Button fx:id="btnActualizar" defaultButton="true" layoutX="1177.0" layoutY="46.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" styleClass="btn-update" text="Actualizar" />
+      <Button fx:id="btnEliminar" defaultButton="true" layoutX="1287.0" layoutY="46.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" styleClass="btn-delete" text="Eliminar" />
+
+      <ImageView fx:id="imgLoad" fitHeight="33.0" fitWidth="40.0" layoutX="225.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/301.GIF" />
+         </image>
+      </ImageView>
+      <ProgressBar fx:id="bar" layoutY="82.0" prefHeight="3.0" prefWidth="1430.0" progress="0.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="615.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" pickOnBounds="false" prefHeight="506.0" prefWidth="738.0" snapToPixel="true" style="-fx-border-color: #2b579a;                   -fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <children>
+          <Label id="TitleLabel" fx:id="title" alignment="CENTER" layoutX="2.0" layoutY="-3.0" mouseTransparent="true" prefHeight="38.0" prefWidth="738.0" text="tareas-app" textFill="#a1a1a1" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0">
+               <font>
+                  <Font name="Segoe UI Semibold" size="14.0" />
+               </font>
+          </Label>
+            <HBox layoutX="892.0" layoutY="2.0" stylesheets="@../css/winDec.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                <Button fx:id="btnFullscreen" mnemonicParsing="false" pickOnBounds="true" prefHeight="30.0" prefWidth="34.0" style="" styleClass="decoration-button-fullscreen" text="" AnchorPane.rightAnchor="102.0" AnchorPane.topAnchor="0.0" />
+                <Button fx:id="btnMinimize" mnemonicParsing="false" pickOnBounds="true" prefHeight="30.0" prefWidth="34.0" style="" styleClass="decoration-button-minimize" text="" AnchorPane.rightAnchor="68.0" AnchorPane.topAnchor="0.0" />
+                <Button fx:id="btnMaximize" mnemonicParsing="false" pickOnBounds="true" prefHeight="30.0" prefWidth="34.0" styleClass="decoration-button-maximize" text="" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="0.0" />
+                <Button fx:id="btnClose" mnemonicParsing="false" pickOnBounds="true" prefHeight="30.0" prefWidth="34.0" styleClass="decoration-button-close" text="" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <rotationAxis>
+                    <Point3D />
+                  </rotationAxis>
+                </Button>
+               </children>
+            </HBox>
+          <Button fx:id="btnResize" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" mouseTransparent="true" pickOnBounds="true" prefHeight="10.0" prefWidth="10.0" styleClass="decoration-button-resize" stylesheets="@../css/winDec.css" text="" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="2.0" />
+            <AnchorPane fx:id="menuPane" layoutX="2.0" layoutY="2.0" prefHeight="613.0" prefWidth="166.0" style="-fx-background-color: #2b579a;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ListView fx:id="listMenu" layoutX="-3.0" layoutY="78.0" prefHeight="535.0" prefWidth="166.0" stylesheets="@../css/listView.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0" />
+                  <Button fx:id="btnLogout" layoutX="22.0" layoutY="19.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../css/buttonCircle.css">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/arrowLeft.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="167.0" layoutY="41.0" prefHeight="550.0" prefWidth="864.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="40.0">
+               <children>
+                  <ScrollPane layoutX="29.0" layoutY="72.0" prefHeight="543.0" prefWidth="863.0" style="-fx-background-color: white;" stylesheets="@../css/Metro-UI.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                      <AnchorPane fx:id="paneData" minHeight="0.0" minWidth="0.0" prefHeight="652.0" prefWidth="1013.0" style="-fx-background-color: white;" />
+                    </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+        </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
