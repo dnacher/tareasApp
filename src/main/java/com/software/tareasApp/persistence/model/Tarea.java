@@ -1,6 +1,7 @@
 package com.software.tareasApp.persistence.model;
 
 import com.google.gson.Gson;
+import com.software.tareasApp.utils.UtilsGeneral;
 import com.software.tareasApp.view.constantes.Constantes;
 
 import javax.persistence.CascadeType;
@@ -114,6 +115,10 @@ public class Tarea {
             }
         });
         return finalMap;
+    }
+
+    public String getFechaToString() {
+        return UtilsGeneral.getFechaFormato(getFecha());
     }
 
     public String toStringLog() {

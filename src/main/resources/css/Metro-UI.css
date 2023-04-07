@@ -1098,3 +1098,10 @@ and open the template in the editor.
     -fx-opacity: 1.0
 }
 
+.red-column.table-cell {
+    -fx-padding: 0.5em;
+    -fx-border-color: transparent -fx-box-border transparent transparent;
+    -fx-font: 13px "Arial";
+    -fx-text-fill: red;
+}
+

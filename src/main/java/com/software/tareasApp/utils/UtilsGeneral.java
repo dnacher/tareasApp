@@ -284,4 +284,26 @@ public class UtilsGeneral {
         return alert.showAndWait();
     }
 
+    public static String getFechaFormato(Date date) {
+        if(date!=null){
+            String fecha="";
+            LocalDate ld = date.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+            if(ld.getDayOfMonth()<10){
+                fecha+= "0" + ld.getDayOfMonth() + "-";
+            }else{
+                fecha+= ld.getDayOfMonth() + "-";
+            }
+            if(ld.getMonthValue()<10){
+                fecha+= "0" + ld.getMonthValue() + "-";
+            }else{
+                fecha+= ld.getMonthValue() + "-";
+            }
+            return fecha + ld.getYear();
+        }else{
+            return "";
+        }
+    }
+
 }

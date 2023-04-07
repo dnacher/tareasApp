@@ -3,11 +3,17 @@ package com.software.tareasApp.controller;
 import com.google.gson.Gson;
 import com.software.tareasApp.Logger.LogManagerClass;
 import com.software.tareasApp.TareaAppApplication;
+import com.software.tareasApp.domain.service.CuentaAhorroService;
+import com.software.tareasApp.domain.service.MovimientoService;
 import com.software.tareasApp.domain.service.TareaService;
+import com.software.tareasApp.domain.service.UsuarioService;
 import com.software.tareasApp.enums.Errores;
 import com.software.tareasApp.enums.MenuPrincipal;
 import com.software.tareasApp.exceptions.TareasAppException;
+import com.software.tareasApp.persistence.model.CuentaAhorro;
+import com.software.tareasApp.persistence.model.Movimiento;
 import com.software.tareasApp.persistence.model.Tarea;
+import com.software.tareasApp.persistence.model.Usuario;
 import com.software.tareasApp.utils.ExportarExcel;
 import com.software.tareasApp.utils.UtilCargaTablas;
 import com.software.tareasApp.utils.UtilsGeneral;
@@ -39,7 +45,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -72,6 +77,9 @@ public class TareasController implements Initializable {
 
 	@FXML
 	private AnchorPane paneReporte;
+
+	@FXML
+	private AnchorPane panePagar;
 
 	@FXML
 	private ProgressBar bar;
@@ -128,6 +136,12 @@ public class TareasController implements Initializable {
 	private DatePicker cmbFecha;
 
 	@FXML
+	private ComboBox<String> cmbFechaPagar;
+
+	@FXML
+	private ComboBox<Usuario> cmbUsuario;
+
+	@FXML
 	private Label lblRopa;
 
 	@FXML
@@ -155,6 +169,9 @@ public class TareasController implements Initializable {
 	private Button btnBackReporte;
 
 	@FXML
+	private Button btnPagar;
+
+	@FXML
 	private Label lblInfoReporte;
 
 	@FXML
@@ -178,18 +195,29 @@ public class TareasController implements Initializable {
 	@FXML
 	private Button btnExportarExcel;
 
+	@FXML
+	private Text txtInfoPago;
+
+	@FXML
+	private Button btnGenerarPago;
+
 	ObservableList<Tarea> tareas;
 	ObservableList<Tarea> tareasReoporte;
 	Tarea tareaSelected;
 
-	@Autowired
-	public TareasController(ConstantesPaginas constantesPaginas, TareaService tareaService){
+	public TareasController(ConstantesPaginas constantesPaginas, TareaService tareaService, UsuarioService usuarioService, MovimientoService movimientoService, CuentaAhorroService cuentaAhorroService){
 		this.constantesPaginas = constantesPaginas;
 		this.tareaService = tareaService;
+		this.usuarioService = usuarioService;
+		this.movimientoService = movimientoService;
+		this.cuentaAhorroService = cuentaAhorroService;
 	}
 
 	private final ConstantesPaginas constantesPaginas;
 	private final TareaService tareaService;
+	private final UsuarioService usuarioService;
+	private final MovimientoService movimientoService;
+	private final CuentaAhorroService cuentaAhorroService;
 
 	private int total = 0;
 	private int totalReporte = 0;
@@ -206,10 +234,40 @@ public class TareasController implements Initializable {
 			}
 			constantesPaginas.setButtons(null, btnAgregar, btnActualizar, btnEliminar, btnGuardar);
 			UtilsSeguridad.seguridad(btnAgregar, btnGuardar,btnActualizar, btnEliminar, MenuPrincipal.Tareas.getPagina());
+			UtilsSeguridad.seguridadAdmin(btnPagar, MenuPrincipal.Tareas.getPagina());
 			task();
 		} catch (Exception ex) {
 			errorLog(ex);
 		}
+	}
+
+	private void comboListener(){
+		cmbUsuario.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!=null){
+				if(cmbFechaPagar.getValue()!=null){
+					txtInfoPago.setText("$ " + generarMes(cmbUsuario.getValue()));
+				}
+			}
+		});
+
+		cmbFechaPagar.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!=null){
+				if(cmbUsuario.getValue()!=null){
+					txtInfoPago.setText("$ " + generarMes(cmbUsuario.getValue()));
+				}
+			}
+		});
+	}
+
+	private Integer generarMes(Usuario usuario){
+		int mesInt = UtilsGeneral.getMesInteger(cmbFechaPagar.getValue());
+		mesInt--;
+		Date desde = UtilsGeneral.getLastDayMonthDate(UtilsGeneral.getMesString(mesInt));
+		Date hasta = UtilsGeneral.getLastDayMonthDate(cmbFechaPagar.getValue());
+		return tareaService
+				.getTareasByFechaAndUsuario(desde, hasta, usuario)
+				.stream()
+				.mapToInt(Tarea::getTotal).sum();
 	}
 
 	private void chkBoxListener(){
@@ -373,10 +431,11 @@ public class TareasController implements Initializable {
 					imgAgua.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/coconut.png"))));
 				}
 				total = 0;
-				cmbFechaReporteDesde.setItems(FXCollections.observableArrayList(Constantes.LISTA_MESES));
+				cargarCombos();
 				btnOnAction();
 				buttonDisable(true);
 				cargaTablaTareas();
+				comboListener();
 				mostrarTabla();
 			} catch (Exception ex) {
 				logger.error(TareaAppApplication.usuario, ex.getMessage(), ex);
@@ -387,6 +446,12 @@ public class TareasController implements Initializable {
 		new Thread(longTask).start();
 	}
 
+	private void cargarCombos(){
+		cmbFechaReporteDesde.setItems(FXCollections.observableArrayList(Constantes.LISTA_MESES));
+		cmbFechaPagar.setItems(FXCollections.observableArrayList(Constantes.LISTA_MESES));
+		cmbUsuario.setItems(FXCollections.observableArrayList(usuarioService.getUsuariosNotAdmin()));
+	}
+
 	private void btnOnAction(){
 		btnActualizarOnAction();
 		btnEliminarOnAction();
@@ -394,9 +459,41 @@ public class TareasController implements Initializable {
 		btnBackOnAction();
 		btnAgregarOnAction();
 		btnReporteOnAction();
+		btnPagarOnAction();
 		btnBackReporteOnAction();
 		btnGenerarReporteOnAction();
 		btnExportarExcelOnAction();
+		btnGenerarPagoOnAction();
+	}
+
+	private void btnGenerarPagoOnAction(){
+    btnGenerarPago.setOnAction(
+        (event -> {
+          cargarDinero();
+        }));
+	}
+
+	private void cargarDinero(){
+		CuentaAhorro cuentaAhorro = cuentaAhorroService.findByUsuario(cmbUsuario.getValue());
+		String valor = txtInfoPago.getText().substring(2);
+		int nuevoSaldo = Integer.valueOf(valor);
+		cuentaAhorro.setSaldo(cuentaAhorro.getSaldo() + nuevoSaldo);
+		String concepto = "Sueldo " + cmbFechaPagar.getValue();
+		Movimiento movimiento = movimientoService.findByCuentaAhorroAndConcepto(cuentaAhorro, concepto);
+		if(movimiento!=null){
+			UtilsGeneral.error(Errores.ERROR_CONCEPTO_EXISTE);
+		} else {
+			cuentaAhorro = cuentaAhorroService.saveCuentaAhorro(cuentaAhorro);
+			movimiento = new Movimiento();
+			movimiento.setConcepto("Sueldo " + cmbFechaPagar.getValue());
+			movimiento.setCredito(nuevoSaldo);
+			movimiento.setDebito(0);
+			movimiento.setCuentaAhorro(cuentaAhorro);
+			movimiento.setSaldo(cuentaAhorro.getSaldo());
+			movimiento.setFecha(new Date());
+			movimientoService.saveMovimiento(movimiento);
+			UtilsGeneral.correct(ConstantesMensajes.GUARDADO_OK);
+		}
 	}
 
 	private void btnGenerarReporteOnAction(){
@@ -407,8 +504,6 @@ public class TareasController implements Initializable {
 			mesInt--;
             Date desde = UtilsGeneral.getLastDayMonthDate(UtilsGeneral.getMesString(mesInt));
             Date hasta = UtilsGeneral.getLastDayMonthDate(cmbFechaReporteDesde.getValue());
-            System.out.println(desde);
-            System.out.println(hasta);
             tareasReoporte =
                 FXCollections.observableArrayList(
                     tareaService.getTareasByFechaAndUsuario(
@@ -427,11 +522,15 @@ public class TareasController implements Initializable {
 	}
 
 	private void btnAgregarOnAction() {
-		btnAgregar.setOnAction((event) -> nuevoIngreso());
+		btnAgregar.setOnAction((event) -> nuevaTarea());
 	}
 
 	private void btnReporteOnAction(){
 		btnReporte.setOnAction((event -> reporte()));
+	}
+
+	private void btnPagarOnAction(){
+		btnPagar.setOnAction((event -> mostrarPagar()));
 	}
 
 	private void btnGuardarOnAction() {
@@ -567,7 +666,7 @@ public class TareasController implements Initializable {
 		}
 	}
 
-	private void nuevoIngreso() {
+	private void nuevaTarea() {
 		clear();
 		LocalDate now = Instant.ofEpochMilli(new Date().getTime())
 				.atZone(ZoneId.systemDefault())
@@ -577,7 +676,15 @@ public class TareasController implements Initializable {
 		mostrarFormulario();
 	}
 
+	private void mostrarPagar() {
+		paneCrud.setOpacity(0);
+		paneTabel.setOpacity(0);
+		paneReporte.setOpacity(0);
+		new FadeInUpTransition(panePagar).play();
+	}
+
 	private void mostrarReporte() {
+		panePagar.setOpacity(0);
 		btnGuardar.setText(ConstantesEtiquetas.GUARDAR);
 		tableData.getSelectionModel().clearSelection();
 		paneCrud.setOpacity(0);
@@ -586,6 +693,7 @@ public class TareasController implements Initializable {
 	}
 
 	private void mostrarTabla() {
+		panePagar.setOpacity(0);
 		btnGuardar.setText(ConstantesEtiquetas.GUARDAR);
 		tableData.getSelectionModel().clearSelection();
 		paneCrud.setOpacity(0);
@@ -594,6 +702,7 @@ public class TareasController implements Initializable {
 	}
 
 	private void mostrarFormulario(){
+		panePagar.setOpacity(0);
 		buttonDisable(true);
 		paneTabel.setOpacity(0);
 		paneReporte.setOpacity(0);

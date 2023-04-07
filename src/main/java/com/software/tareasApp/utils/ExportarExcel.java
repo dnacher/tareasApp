@@ -63,9 +63,14 @@ public class ExportarExcel {
                 }
             }
         }
-        row = spreadsheet.createRow(table.getItems().size()+1);
-        row.createCell(table.getColumns().size()-1).
-                setCellValue(total);
+        //total
+        row = spreadsheet.createRow(table.getItems().size()+3);
+        Cell cellFooterString = row.createCell(table.getColumns().size()-2);
+        Cell cellFooter = row.createCell(table.getColumns().size()-1);
+        cellFooterString.setCellValue("Total $");
+        cellFooter.setCellValue(total);
+        cellFooterString.setCellStyle(cellStyle);
+        cellFooter.setCellStyle(cellStyle);
     }
 
     private static void crearArchivo(String nombreArchivo, HSSFWorkbook workbook) throws IOException {

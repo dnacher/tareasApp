@@ -13,6 +13,9 @@ public enum Errores {
 	ERROR_LOGIN_DATOS_INCORRECTOS("El nombre o contraseña son incorrectos", 3),
 	ERROR_GENERAL("Hubo un error", 0),
 
+	//Pago											040 - 060
+	ERROR_CONCEPTO_EXISTE("Para este mes y esta cuenta ya fue pago",040),
+
 	//Reportes 										261 - 280
 	ELEGIR_ARCHIVO("Debe elegir un archivo",261),
 	SELECCIONE_OPCION("Seleccione una opción",262),

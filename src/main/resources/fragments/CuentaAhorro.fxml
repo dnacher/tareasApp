@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1400.0" style="-fx-background-color: white;" stylesheets="@../css/Metro-UI.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="paneTabel" layoutY="91.0" opacity="0.0" prefHeight="560.0" prefWidth="1400.0">
+         <children>
+            <Text fx:id="txtSaldo" fill="#2b579a" layoutX="7.0" layoutY="7.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.topAnchor="7.0">
+               <font>
+                  <Font name="Segoe UI Semilight" size="48.0" />
+               </font>
+            </Text>
+            <TableView fx:id="tableData" layoutX="7.0" layoutY="20.0" prefHeight="546.0" prefWidth="1400.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="100.0" />
+         </children>
+      </AnchorPane>
+
+      <Separator layoutY="89.0" prefHeight="0.0" prefWidth="1400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Text fx:id="textTitulo" fill="#2b579a" layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Segoe UI Semilight" size="48.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="imgLoad" fitHeight="33.0" fitWidth="40.0" layoutX="225.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/301.GIF" />
+         </image>
+      </ImageView>
+      <ProgressBar fx:id="bar" layoutY="82.0" prefHeight="3.0" prefWidth="1430.0" progress="0.0" />
+   </children>
+</AnchorPane>

@@ -133,6 +133,24 @@
          </children>
       </AnchorPane>
 
+      <AnchorPane fx:id="panePagar" layoutY="91.0" opacity="0.0" prefHeight="570.0" prefWidth="1400.0" style="-fx-background-color: white;">
+         <children>
+            <ComboBox fx:id="cmbFechaPagar" layoutX="100.0" layoutY="18.0" prefHeight="29.0" prefWidth="110.0" />
+            <ComboBox fx:id="cmbUsuario" layoutX="220.0" layoutY="18.0" prefHeight="29.0" prefWidth="110.0" />
+            <Button fx:id="btnGenerarPago" layoutX="340.0" layoutY="18.0" styleClass="btn" text="Generar Pago" />
+            <Text fx:id="txtInfoPago" fill="#b80d07" layoutX="29.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" wrappingWidth="367.0" text="\$">
+               <font><Font name="Segoe UI Semilight" size="14.0" /></font>
+            </Text>
+            <Button fx:id="btnBackPago" layoutX="29.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../css/buttonCircleBlack.css">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../images/arrowLeftBlack.png" />
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+
 
       <Separator layoutY="89.0" prefHeight="0.0" prefWidth="1400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Text fx:id="textTitulo" fill="#2b579a" layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0">
@@ -140,10 +158,11 @@
             <Font name="Segoe UI Semilight" size="48.0" />
          </font>
       </Text>
-      <Button fx:id="btnAgregar" layoutX="957.0" layoutY="46.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" styleClass="btn" text="Agregar" />
-      <Button fx:id="btnActualizar" layoutX="1177.0" layoutY="46.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" styleClass="btn-update" text="Actualizar" />
-      <Button fx:id="btnReporte" layoutX="1397.0" layoutY="46.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" styleClass="btn" text="Reporte" />
-      <Button fx:id="btnEliminar" layoutX="1417.0" layoutY="46.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" styleClass="btn-delete" text="Eliminar" />
+      <Button fx:id="btnPagar" layoutX="737.0" layoutY="46.0" prefHeight="27.0" prefWidth="108.0" styleClass="btn-update" text="Pagar" />
+      <Button fx:id="btnAgregar" layoutX="957.0" layoutY="46.0" prefHeight="27.0" prefWidth="108.0" styleClass="btn" text="Agregar" />
+      <Button fx:id="btnActualizar" layoutX="1177.0" layoutY="46.0" prefHeight="27.0" prefWidth="108.0" styleClass="btn-update" text="Actualizar" />
+      <Button fx:id="btnReporte" layoutX="1397.0" layoutY="46.0" prefHeight="27.0" prefWidth="108.0" styleClass="btn" text="Reporte" />
+      <Button fx:id="btnEliminar" layoutX="1417.0" layoutY="46.0" prefHeight="27.0" prefWidth="108.0" styleClass="btn-delete" text="Eliminar" />
 
       <ImageView fx:id="imgLoad" fitHeight="33.0" fitWidth="40.0" layoutX="225.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>

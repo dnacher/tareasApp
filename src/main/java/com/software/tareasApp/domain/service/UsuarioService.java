@@ -24,6 +24,8 @@ public class UsuarioService {
         return usuarioDAO.getUsuarios();
     }
 
+    public List<Usuario> getUsuariosNotAdmin() { return usuarioDAO.getUsuariosNotAdmin(); }
+
     public Usuario saveUsuario(Usuario usuario){
         return usuarioDAO.saveUsuario(usuario);
     }

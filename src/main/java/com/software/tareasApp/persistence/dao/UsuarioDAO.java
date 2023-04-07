@@ -34,6 +34,17 @@ public class UsuarioDAO {
         return usuarios;
     }
 
+    public List<Usuario> getUsuariosNotAdmin() {
+        List<Usuario> usuarios = new ArrayList<>();
+        this.repository.findAll().forEach(user -> {
+            if(!user.getTipoUsuario().getNombre().equals("admin")){
+                usuarios.add(user);
+            }
+        });
+        log.info(TareaAppApplication.usuario, "getUsuarios");
+        return usuarios;
+    }
+
     public Usuario saveUsuario(Usuario usuario) throws TareasAppException {
         log.info(TareaAppApplication.usuario, "saveUsuario " + usuario);
         String hashedPassword= BCrypt.hashpw(usuario.getPassword(),BCrypt.gensalt(LOG_ROUNDS));

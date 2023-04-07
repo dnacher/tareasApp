@@ -1,5 +1,6 @@
 package com.software.tareasApp.enums;
 
+import com.software.tareasApp.controller.CuentaAhorroController;
 import com.software.tareasApp.controller.MainController;
 import com.software.tareasApp.controller.TareasController;
 
@@ -11,6 +12,7 @@ public enum MenuPrincipal {
 
     Inicio("Inicio", "Inicio","Principal", MainController.class),
     Tareas("Tareas", "Tareas","Principal", TareasController.class),
+    CuentaAhorro("CuentaAhorro", "Cuenta de Ahorro", "Principal", CuentaAhorroController.class),
     Seguridad("Seguridad", "Seguridad","Principal", null),;
 
     private final String pagina;

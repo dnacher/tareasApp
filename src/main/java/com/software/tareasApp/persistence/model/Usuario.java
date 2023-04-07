@@ -67,6 +67,11 @@ public class Usuario {
         this.tipoUsuario = tipoUsuario;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
     public String toStringLog() {
         return "Usuario{" +
                 "id=" + id +

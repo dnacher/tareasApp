@@ -17,6 +17,14 @@ public class ConstantesEtiquetas {
     */
     public static String TIPO_USUARIO = "tipoUsuario";
     public static String TIPO_USUARIO_UPPER = "Tipo de Usuario";
+    public static String CONCEPTO_UPPER = "Concepto";
+    public static String CONCEPTO = "concepto";
+    public static String CREDITO_UPPER = "Credito";
+    public static String CREDITO = "credito";
+    public static String DEBITO_UPPER = "Debito";
+    public static String DEBITO = "debito";
+    public static String SALDO_UPPER = "Saldo";
+    public static String SALDO = "saldo";
 
     /*
     *        Formularios

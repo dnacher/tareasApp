@@ -75,4 +75,8 @@ public class UtilsSeguridad {
         traePermisosAdministrador(btnEliminar, pagina);
         return getPermisoValor(pagina);
     }
+
+    public static void seguridadAdmin(Button btn, String pagina){
+        traePermisosAdministrador(btn, pagina);
+    }
 }
