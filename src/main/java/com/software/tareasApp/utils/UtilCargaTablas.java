@@ -7,14 +7,9 @@ import com.software.tareasApp.persistence.model.TipoUsuario;
 import com.software.tareasApp.persistence.model.Usuario;
 import com.software.tareasApp.view.constantes.ConstantesEtiquetas;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
-
-import javax.security.auth.callback.Callback;
-
 
 public class UtilCargaTablas {
 

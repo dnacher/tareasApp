@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="327.0" prefWidth="493.0"
             style="-fx-background-color: #2B579A;"
@@ -11,7 +14,7 @@
             xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ComboBox fx:id="cmbUsuario" styleClass="combo-box-base" layoutX="100.0" layoutY="133.0" prefWidth="250.0"
-                   promptText="Usuario" style="-fx-text-fill: white;"></ComboBox>
+                promptText="Usuario" style="-fx-text-fill: white;"></ComboBox>
       <JFXPasswordField fx:id="txtPassword" focusColor="#7189d0" layoutX="100.0" layoutY="173.0" prefWidth="250.0"
                         promptText="Contraseña" style="-fx-text-fill: white;" unFocusColor="WHITE">
          <font>

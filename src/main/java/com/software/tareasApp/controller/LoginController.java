@@ -133,8 +133,10 @@ public class LoginController implements Initializable {
 	}
 
 	private void getVer() {
-		if(cmbUsuario.getValue().equals("Mathias") || cmbUsuario.getValue().equals("Agustina")){
-			txtPassword.setText("asdasd");
+		if(cmbUsuario.getValue()!=null){
+			if(cmbUsuario.getValue().equals("Mathias") || cmbUsuario.getValue().equals("Agustina")){
+				txtPassword.setText("asdasd");
+			}
 		}
 	}
 

@@ -50,7 +50,6 @@ public class CuentaAhorroDAO {
         return this.repository.save(cuentaAhorro);
     }
 
-
     public void deleteCuentaAhorro(CuentaAhorro cuentaAhorro) {
         log.info(TareaAppApplication.usuario, "deleteCuentaAhorros " + cuentaAhorro.toStringLog());
         this.repository.delete(cuentaAhorro);

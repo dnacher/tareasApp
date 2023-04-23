@@ -145,6 +145,19 @@ public class UtilsGeneral {
         }
     }
 
+    public static Date getDateFromLocalDateConHora(LocalDate localDate) {
+        if(localDate!=null){
+            Date date = new Date();
+            return Date.from(localDate.atStartOfDay(ZoneId.systemDefault())
+                    .plusHours(date.getHours())
+                    .plusMinutes(date.getMinutes())
+                    .plusSeconds(date.getSeconds())
+                    .toInstant());
+        }else{
+            return null;
+        }
+    }
+
     public static LocalDate getLocalDateFromDate(Date date) {
         return Instant.ofEpochMilli(date.getTime())
                 .atZone(ZoneId.systemDefault())
@@ -303,6 +316,15 @@ public class UtilsGeneral {
             return fecha + ld.getYear();
         }else{
             return "";
+        }
+    }
+
+    public static boolean isNumero(String value){
+        try {
+            Integer val = Integer.valueOf(value);
+            return true;
+        } catch (Exception ex){
+            return false;
         }
     }
 

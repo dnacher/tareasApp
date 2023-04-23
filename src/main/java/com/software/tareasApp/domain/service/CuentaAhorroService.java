@@ -1,5 +1,6 @@
 package com.software.tareasApp.domain.service;
 
+import com.software.tareasApp.exceptions.TareasAppException;
 import com.software.tareasApp.persistence.dao.CuentaAhorroDAO;
 import com.software.tareasApp.persistence.model.CuentaAhorro;
 import com.software.tareasApp.persistence.model.Usuario;
@@ -34,6 +35,10 @@ public class CuentaAhorroService {
 
     public CuentaAhorro saveCuentaAhorro(CuentaAhorro cuentaAhorro){
         return cuentaAhorroDAO.saveCuentaAhorro(cuentaAhorro);
+    }
+
+    public CuentaAhorro updateCuentaAhorro(CuentaAhorro cuentaAhorro) throws TareasAppException {
+        return cuentaAhorroDAO.updateCuentaAhorro(cuentaAhorro);
     }
 
     public void deleteCuentaAhorro(CuentaAhorro cuentaAhorro) throws SQLIntegrityConstraintViolationException {

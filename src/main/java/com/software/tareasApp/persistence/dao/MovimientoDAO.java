@@ -46,7 +46,7 @@ public class MovimientoDAO {
 
     public List<Movimiento> findByCuentaAhorro(CuentaAhorro cuentaAhorro){
         log.info(TareaAppApplication.usuario, "findByCuentaAhorro " + cuentaAhorro.toStringLog());
-        return this.repository.findByCuentaAhorro(cuentaAhorro);
+        return this.repository.findByCuentaAhorroOrderByFechaDesc(cuentaAhorro);
     }
 
     public List<Movimiento> findByCuentaAhorroAndFechaBetween(CuentaAhorro cuentaAhorro, Date fechaDesde, Date fechaHasta){

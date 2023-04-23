@@ -1,14 +1,9 @@
 package com.software.tareasApp.persistence.repository;
 
 import com.software.tareasApp.persistence.model.CuentaAhorro;
-import com.software.tareasApp.persistence.model.Tarea;
 import com.software.tareasApp.persistence.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Daniel Nacher

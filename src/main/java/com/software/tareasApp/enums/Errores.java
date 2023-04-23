@@ -13,8 +13,14 @@ public enum Errores {
 	ERROR_LOGIN_DATOS_INCORRECTOS("El nombre o contraseña son incorrectos", 3),
 	ERROR_GENERAL("Hubo un error", 0),
 
-	//Pago											040 - 060
+	//Pago y gasto										040 - 060
 	ERROR_CONCEPTO_EXISTE("Para este mes y esta cuenta ya fue pago",040),
+	ERROR_FALTAN_DATOS_PAGO_GASTO("Faltan datos para generar el gasto", 041),
+	ERROR_FALTAN_DATOS_PAGO_NOTA_CREDITO("Faltan datos para generar la nota de credito", 042),
+	SALDO_INSUFICIENTE("Saldo insuficiente para esta fecha, verifique saldo", 043),
+	CUENTA_AHORRO_INEXISTENTE("No existe cuenta de ahorro para este usuario", 044),
+	ERROR_GASTO_POSTIVO("El gastos debe ser mayor a 0", 045),
+	ERROR_NOTA_CREDITO_POSTIVO("La nota de credito debe ser mayor a 0", 046),
 
 	//Reportes 										261 - 280
 	ELEGIR_ARCHIVO("Debe elegir un archivo",261),

@@ -37,6 +37,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -200,6 +201,36 @@ public class TareasController implements Initializable {
 
 	@FXML
 	private Button btnGenerarPago;
+
+	@FXML
+	private Button btnGenerarGasto;
+
+	@FXML
+	private DatePicker cmbFechaGasto;
+
+	@FXML
+	private ComboBox<Usuario> cmbUsuarioGasto;
+
+	@FXML
+	private TextField txtGasto;
+
+	@FXML
+	private TextField txtGastoValor;
+
+	@FXML
+	private Button btnGenerarNotaCredito;
+
+	@FXML
+	private DatePicker cmbFechaNotaCredito;
+
+	@FXML
+	private ComboBox<Usuario> cmbUsuarioNotaCredito;
+
+	@FXML
+	private TextField txtNotaCredito;
+
+	@FXML
+	private TextField txtNotaCreditoValor;
 
 	ObservableList<Tarea> tareas;
 	ObservableList<Tarea> tareasReoporte;
@@ -450,6 +481,9 @@ public class TareasController implements Initializable {
 		cmbFechaReporteDesde.setItems(FXCollections.observableArrayList(Constantes.LISTA_MESES));
 		cmbFechaPagar.setItems(FXCollections.observableArrayList(Constantes.LISTA_MESES));
 		cmbUsuario.setItems(FXCollections.observableArrayList(usuarioService.getUsuariosNotAdmin()));
+
+		cmbUsuarioGasto.setItems(FXCollections.observableArrayList(usuarioService.getUsuariosNotAdmin()));
+		cmbUsuarioNotaCredito.setItems(FXCollections.observableArrayList(usuarioService.getUsuariosNotAdmin()));
 	}
 
 	private void btnOnAction(){
@@ -464,19 +498,126 @@ public class TareasController implements Initializable {
 		btnGenerarReporteOnAction();
 		btnExportarExcelOnAction();
 		btnGenerarPagoOnAction();
+		btnGenerarGastoOnAction();
+		btnGenerarNotaCreditoOnAction();
+	}
+
+	private void btnGenerarGastoOnAction(){
+		btnGenerarGasto.setOnAction((event -> generarGasto()));
+	}
+
+	private void btnGenerarNotaCreditoOnAction(){
+		btnGenerarNotaCredito.setOnAction((event -> generarNotaCredito()));
+	}
+
+	private void generarNotaCredito(){
+		if(cmbFechaNotaCredito.getValue()!=null && !txtNotaCredito.getText().isEmpty() && cmbUsuarioNotaCredito.getValue()!=null && UtilsGeneral.isNumero(txtNotaCreditoValor.getText())){
+			int nuevaNotaCredito = Integer.valueOf(txtNotaCreditoValor.getText());
+			if(nuevaNotaCredito>0){
+				CuentaAhorro cuentaAhorro = cuentaAhorroService.findByUsuario(cmbUsuarioNotaCredito.getValue());
+				if(cuentaAhorro!=null){
+					int nuevoSaldo = cuentaAhorro.getSaldo() + nuevaNotaCredito;
+					try{
+						cuentaAhorro.setSaldo(nuevoSaldo);
+						cuentaAhorro = cuentaAhorroService.updateCuentaAhorro(cuentaAhorro);
+
+						Movimiento movimiento = new Movimiento();
+						movimiento.setConcepto(txtNotaCredito.getText());
+						movimiento.setCredito(nuevaNotaCredito);
+						movimiento.setDebito(0);
+						movimiento.setCuentaAhorro(cuentaAhorro);
+						movimiento.setSaldo(cuentaAhorro.getSaldo());
+						Date fecha = UtilsGeneral.getDateFromLocalDateConHora(cmbFechaNotaCredito.getValue());
+						movimiento.setFecha(fecha);
+						movimientoService.saveMovimiento(movimiento);
+						UtilsGeneral.correct(ConstantesMensajes.GUARDADO_OK);
+						clearNotaCredito();
+					} catch (TareasAppException ex) {
+						UtilsGeneral.errorEx(ex);
+					}
+				} else {
+					UtilsGeneral.error(Errores.CUENTA_AHORRO_INEXISTENTE);
+				}
+			} else {
+				UtilsGeneral.error(Errores.ERROR_NOTA_CREDITO_POSTIVO);
+			}
+		} else {
+			UtilsGeneral.error(Errores.ERROR_FALTAN_DATOS_PAGO_NOTA_CREDITO);
+		}
+	}
+
+	private void generarGasto(){
+		if(cmbFechaGasto.getValue()!=null && !txtGasto.getText().isEmpty() && cmbUsuarioGasto.getValue()!=null && UtilsGeneral.isNumero(txtGastoValor.getText())){
+			int nuevoGasto = Integer.valueOf(txtGastoValor.getText());
+			if(nuevoGasto>0){
+				CuentaAhorro cuentaAhorro = cuentaAhorroService.findByUsuario(cmbUsuarioGasto.getValue());
+				if(cuentaAhorro!=null){
+					int nuevoSaldo = cuentaAhorro.getSaldo() - nuevoGasto;
+					Optional<Movimiento> saldoTest = cuentaAhorro.getMovimientos()
+							.stream()
+							.filter(movimiento -> UtilsGeneral.getLocalDateFromDate(movimiento.getFecha())
+									.isBefore(cmbFechaGasto.getValue()) ||
+									UtilsGeneral
+											.getLocalDateFromDate(movimiento.getFecha())
+											.isEqual(cmbFechaGasto.getValue()))
+							.filter(movimiento -> movimiento.getSaldo() - nuevoGasto > 0)
+							.findFirst();
+					if(saldoTest.isPresent() && nuevoSaldo>=0){
+						try{
+							cuentaAhorro.setSaldo(nuevoSaldo);
+							cuentaAhorro = cuentaAhorroService.updateCuentaAhorro(cuentaAhorro);
+
+							Movimiento movimiento = new Movimiento();
+							movimiento.setConcepto(txtGasto.getText());
+							movimiento.setCredito(0);
+							movimiento.setDebito(nuevoGasto);
+							movimiento.setCuentaAhorro(cuentaAhorro);
+							movimiento.setSaldo(cuentaAhorro.getSaldo());
+							Date fecha = UtilsGeneral.getDateFromLocalDateConHora(cmbFechaGasto.getValue());
+							movimiento.setFecha(fecha);
+							movimientoService.saveMovimiento(movimiento);
+							UtilsGeneral.correct(ConstantesMensajes.GUARDADO_OK);
+							clearGasto();
+						} catch (TareasAppException ex) {
+							UtilsGeneral.errorEx(ex);
+						}
+					}else {
+						UtilsGeneral.error(Errores.SALDO_INSUFICIENTE);
+					}
+				} else {
+					UtilsGeneral.error(Errores.CUENTA_AHORRO_INEXISTENTE);
+				}
+			}else {
+				UtilsGeneral.error(Errores.ERROR_GASTO_POSTIVO);
+			}
+		} else {
+			UtilsGeneral.error(Errores.ERROR_FALTAN_DATOS_PAGO_GASTO);
+		}
+	}
+
+	private void clearNotaCredito(){
+		cmbFechaNotaCredito.setValue(null);
+		cmbUsuarioNotaCredito.setValue(null);
+		txtNotaCredito.setText("");
+		txtNotaCreditoValor.setText("");
+	}
+
+	private void clearGasto(){
+		cmbFechaGasto.setValue(null);
+		cmbUsuarioGasto.setValue(null);
+		txtGasto.setText("");
+		txtGastoValor.setText("");
 	}
 
 	private void btnGenerarPagoOnAction(){
     btnGenerarPago.setOnAction(
-        (event -> {
-          cargarDinero();
-        }));
+        (event -> cargarDinero()));
 	}
 
 	private void cargarDinero(){
 		CuentaAhorro cuentaAhorro = cuentaAhorroService.findByUsuario(cmbUsuario.getValue());
 		String valor = txtInfoPago.getText().substring(2);
-		int nuevoSaldo = Integer.valueOf(valor);
+		int nuevoSaldo = Integer.parseInt(valor);
 		cuentaAhorro.setSaldo(cuentaAhorro.getSaldo() + nuevoSaldo);
 		String concepto = "Sueldo " + cmbFechaPagar.getValue();
 		Movimiento movimiento = movimientoService.findByCuentaAhorroAndConcepto(cuentaAhorro, concepto);

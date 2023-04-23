@@ -40,7 +40,6 @@ import static com.software.tareasApp.view.constantes.Constantes.PAGINA_LOGIN;
 import static com.software.tareasApp.view.constantes.Constantes.PAGINA_MAIN;
 import static com.software.tareasApp.view.constantes.Constantes.PAGINA_ROOT;
 
-
 @Component
 public class MenuController implements Initializable {
 

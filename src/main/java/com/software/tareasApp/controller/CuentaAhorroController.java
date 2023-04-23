@@ -86,7 +86,7 @@ public class CuentaAhorroController implements Initializable {
 		Task<Void> longTask = UtilsGeneral.task();
 		longTask.setOnSucceeded(t -> {
 			try {
-				cargaTablaTareas();
+				cargaTablaMovimientos();
 				new FadeInUpTransition(paneTabel).play();
 			} catch (Exception ex) {
 				logger.error(TareaAppApplication.usuario, ex.getMessage(), ex);
@@ -97,7 +97,7 @@ public class CuentaAhorroController implements Initializable {
 		new Thread(longTask).start();
 	}
 
-	private void cargaTablaTareas() {
+	private void cargaTablaMovimientos() {
 		UtilCargaTablas.cargaTablaMovimientos(tableData, movimientos);
 	}
 

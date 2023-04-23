@@ -15,6 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.TextField?>
 <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1400.0" style="-fx-background-color: white;" stylesheets="@../css/Metro-UI.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane fx:id="paneCrud" layoutY="91.0" opacity="0.0" prefHeight="570.0" prefWidth="1429.0" style="-fx-background-color: white;">
@@ -141,17 +142,23 @@
             <Text fx:id="txtInfoPago" fill="#b80d07" layoutX="29.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" wrappingWidth="367.0" text="\$">
                <font><Font name="Segoe UI Semilight" size="14.0" /></font>
             </Text>
-            <Button fx:id="btnBackPago" layoutX="29.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../css/buttonCircleBlack.css">
-               <graphic>
-                  <ImageView fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../images/arrowLeftBlack.png" />
-                  </ImageView>
-               </graphic>
-            </Button>
+
+               <Separator layoutY="110.0" prefHeight="0.0" prefWidth="1400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+
+            <DatePicker fx:id="cmbFechaGasto" layoutX="100.0" layoutY="118.0" prefHeight="32.0" prefWidth="150.0" promptText="Fecha gasto"/>
+            <ComboBox fx:id="cmbUsuarioGasto" layoutX="260.0" layoutY="118.0" prefHeight="32.0" prefWidth="110.0" promptText="Usuario"/>
+            <TextField fx:id="txtGasto" layoutX="390.0" layoutY="118.0" prefHeight="29.0" prefWidth="150.0" promptText="Descripcion gasto"/>
+            <TextField fx:id="txtGastoValor" layoutX="550.0" layoutY="118.0" prefHeight="29.0" prefWidth="150.0" promptText="Valor Gasto $"/>
+            <Button fx:id="btnGenerarGasto" layoutX="710.0" layoutY="118.0" prefHeight="32.0" prefWidth="130.0" styleClass="btn" text="Generar Gasto" />
+               <Separator layoutY="158.0" prefHeight="0.0" prefWidth="1400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+
+            <DatePicker fx:id="cmbFechaNotaCredito" layoutX="100.0" layoutY="168.0" prefHeight="32.0" prefWidth="150.0" promptText="Fecha N. credito"/>
+            <ComboBox fx:id="cmbUsuarioNotaCredito" layoutX="260.0" layoutY="168.0" prefHeight="32.0" prefWidth="110.0" promptText="Usuario"/>
+            <TextField fx:id="txtNotaCredito" layoutX="390.0" layoutY="168.0" prefHeight="29.0" prefWidth="150.0" promptText="Descripcion nota credito"/>
+            <TextField fx:id="txtNotaCreditoValor" layoutX="550.0" layoutY="168.0" prefHeight="29.0" prefWidth="150.0" promptText="Valor nota credito $"/>
+            <Button fx:id="btnGenerarNotaCredito" layoutX="710.0" layoutY="168.0" prefHeight="32.0" prefWidth="130.0" styleClass="btn" text="Nota Credito" />
          </children>
       </AnchorPane>
-
-
       <Separator layoutY="89.0" prefHeight="0.0" prefWidth="1400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Text fx:id="textTitulo" fill="#2b579a" layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
